@@ -1,20 +1,20 @@
 # returns sorted array(from smallest to biggest number)
 def bubble_sort(array)
   prev_array = []
-  index = array.size
+  count = array.size
 
   until array == prev_array
     prev_array = array.dup
-    array = bubble(array, index)
-    index -= 1
+    array = bubble(array, count)
+    count -= 1
   end
 
   array
 end
 
 # single iteration of bubble sort, where num is
-# an index of array to where we should iterate,
-# since rest may be already sorted.
+# number of elements in array to compare, since
+# rest may be already sorted.
 def bubble(array, num = array.size)
   num -= 1 # subtracting one since change affect array[num + 1]
   i = 0
