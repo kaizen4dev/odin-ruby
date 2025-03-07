@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def stock_picker(arr)
   # find all possible profits(or losses)
   # in the end we'll have hash with items in such format: buy_index $ sell_index => profit
@@ -9,17 +11,8 @@ def stock_picker(arr)
   end
 
   # find best value(profit) and key(days)
-  bst_profit = 0
-  bst_days = ''
-  profits.each do |days, profit|
-    if bst_profit < profit
-      bst_profit = profit
-      bst_days = days
-    end
-  end
-
-  # finally return keys(days), when to buy and sell, in array
-  bst_days.split('$')
+  bst_profit = profits.values.reduce { |best, current| best > current ? best : current }
+  profits.key(bst_profit).split('$')
 end
 
 p stock_picker([17, 3, 6, 9, 15, 8, 6, 1, 10])

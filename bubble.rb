@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # returns sorted array(from smallest to biggest number)
 def bubble_sort(array)
   prev_array = []
@@ -16,9 +18,9 @@ end
 # number of elements in array to compare, since
 # rest may be already sorted.
 def bubble(array, num = array.size)
-  num -= 1 # subtracting one since change affect array[num + 1]
   i = 0
-  num.times do
+  # subtracting one since change also affect value at i + 1
+  (num - 1).times do
     value = array[i]
     if array[i + 1] < value
       array[i] = array[i + 1]
