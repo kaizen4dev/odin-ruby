@@ -1,2 +1,3 @@
-# odin-ruby
-Projects from ruby course of The Odin Project curriculum.
+# Mastermind
+
+Solution for Mastermind project in ruby course of The Odin Project curriculum.
