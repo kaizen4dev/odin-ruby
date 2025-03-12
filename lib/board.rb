@@ -8,7 +8,7 @@ class Board
 
   private
 
-  attr_writer :board, :code, :last_feedback
+  attr_writer :board, :code, :feedback
 
   def initialize(code = generate_code)
     new_board
@@ -29,15 +29,27 @@ class Board
     self.board = BOARD_BLUEPRINT.dup
   end
 
-  # compare guess and give feedback with colored "!"
-  def feedback(guess)
+  # update feedback accourding to guess
+  def new_feedback(guess)
+    # clear previous feedback
+    self.feedback = []
+
     # convert code and guess to arrays
     code = self.code.split(' ')
     guess = guess.split(' ')
 
-    feedback = []
+    # add red "!" - spheres guessed correctly
+    red_feedback(guess, code)
 
-    # add red "!"s to feedback and change used spheres to nil
+    # add white "!" - spheres from guess appeared in code, but in wrong place
+    white_feedback(guess, code)
+
+    # convert feedback from array to string
+    self.feedback = feedback.join('')
+  end
+
+  # add red "!"s to feedback and delete used sphares from guess and code arrays
+  def red_feedback(guess, code)
     (0..3).each do |i|
       next unless code[i] == guess[i]
 
@@ -45,14 +57,19 @@ class Board
       code[i] = guess[i] = nil
     end
 
+    # delete nils
+    code.compact!
+    guess.compact!
+
+    feedback
+  end
+
+  # adds white "!"s to feedback array
+  def white_feedback(guess, code)
     # count rest of spheres
     count = { guess: Hash.new(0), code: Hash.new(0) }
-    guess.each do |value|
-      count[:guess][value] += 1 unless value.nil?
-    end
-    code.each do |value|
-      count[:code][value] += 1 unless value.nil?
-    end
+    guess.each { |value| count[:guess][value] += 1 }
+    code.each { |value| count[:code][value] += 1 }
 
     # reduce guess to only include those spheres that are in code
     count[:guess].select! { |key, _value| count[:code].keys.include?(key) }
@@ -62,33 +79,35 @@ class Board
     #
     # for each sphere in guess
     #   compare how many times sphere appeared in guess and code
+    #
     #   if guess has more spheres than code
-    #     (spheres in code).times push "!" to feedback
+    #     n = amount of speres in code
     #   otherwise
-    #     do it (spheres in guess).times
+    #     n = amount of speres in guess
+    #
+    #   n.times push "!" to feedback
     #
     # ===========================================
     count[:guess].each_key do |key|
-      if count[:guess][key] < count[:code][key]
-        count[:guess][key].times { feedback.push('!') }
-      else
-        count[:code][key].times { feedback.push('!') }
-      end
+      n = count[:guess][key] < count[:code][key] ? count[:guess][key] : count[:code][key]
+      n.times { feedback.push('!') }
     end
-
-    # finally record and return our feedback
-    self.last_feedback = feedback.join('')
-    feedback.join('')
   end
 
   public
 
-  attr_reader :board, :code, :last_feedback
+  attr_reader :board, :code, :feedback
 
   # add guess to current board
   def make_guess(guess)
+    # get index of first "empty" row
     i = board.index('󰽤 󰽤 󰽤 󰽤 ')
-    board[i] = "#{guess} | #{feedback(guess)}" unless i.nil?
+
+    # update feedback
+    new_feedback(guess)
+
+    # fill that row with guess and feedback
+    board[i] = "#{guess} | #{feedback}" unless i.nil?
   end
 
   def colors
