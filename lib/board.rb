@@ -20,10 +20,6 @@ class Board
 
   # start the game
   def play
-    # switch player order, so everyone has a chance to move first
-    switch_syms
-    players.reverse!
-
     # play till game is over
     loop { players.each(&:move) }
   end
@@ -92,6 +88,9 @@ class Board
     if input == 'n'
       exit!
     elsif input == 'y'
+      # switch player order, so everyone has a chance to move first
+      switch_players
+      # start new game
       return play
     end
 
@@ -99,9 +98,11 @@ class Board
     next_game?
   end
 
-  # switch "x" and "o" for players
-  def switch_syms
+  # switch player order
+  def switch_players
+    players.reverse!
     players[0].sym, players[1].sym = players[1].sym, players[0].sym
+    puts 'Switching sides!'
   end
 
   # print current board
