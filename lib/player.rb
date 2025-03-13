@@ -55,12 +55,7 @@ class Player
     # convert to array of numbers
     nums = code.split('').map(&:to_i)
 
-    # check if num is in colors scope
-    nums.each do |num|
-      return false if num.to_i > 6 || num.to_i < 1
-    end
-
-    # all checks passed
-    true
+    # check if nums are in colors scope, return result
+    nums.all? { |num| num.between?(1, 6) }
   end
 end
