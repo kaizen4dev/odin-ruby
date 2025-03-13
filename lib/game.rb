@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# game itself
+# lets you to play
 class Game
   def initialize(player = Player.new, board = Board.new)
     self.player = player
