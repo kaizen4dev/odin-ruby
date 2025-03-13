@@ -110,7 +110,7 @@ class Board
     board[i] = "#{guess} | #{feedback}" unless i.nil?
   end
 
-  def colors
+  def self.colors
     ALL_COLORS
   end
 end
