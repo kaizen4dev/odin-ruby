@@ -98,7 +98,7 @@ class Board
 
   attr_reader :board, :code, :feedback
 
-  # add guess to current board
+  # add guess to current board and return status of the game
   def make_guess(guess)
     # get index of first "empty" row
     i = board.index('󰽤 󰽤 󰽤 󰽤 ')
@@ -107,7 +107,11 @@ class Board
     new_feedback(guess)
 
     # fill that row with guess and feedback
-    board[i] = "#{guess} | #{feedback}" unless i.nil?
+    board[i] = "#{guess} | #{feedback}" unless game_over?
+  end
+
+  def game_over?
+    board.index('󰽤 󰽤 󰽤 󰽤 ').nil? || feedback == "\e[0;31;49m!\e[0m\e[0;31;49m!\e[0m\e[0;31;49m!\e[0m\e[0;31;49m!\e[0m"
   end
 
   def self.colors
