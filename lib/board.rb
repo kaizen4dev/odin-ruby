@@ -108,6 +108,15 @@ class Board
 
     # fill that row with guess and feedback
     board[i] = "#{guess} | #{feedback}" unless game_over?
+
+    # return status
+    if i.nil?
+      'lost'
+    elsif game_over?
+      'won'
+    else
+      'ongoing'
+    end
   end
 
   def game_over?
