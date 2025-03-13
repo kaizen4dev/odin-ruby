@@ -107,13 +107,13 @@ class Board
     new_feedback(guess)
 
     # fill that row with guess and feedback
-    board[i] = "#{guess} | #{feedback}" unless game_over?
+    board[i] = "#{guess} | #{feedback}" unless i.nil?
 
     # return status
-    if i.nil?
-      'lost'
-    elsif game_over?
+    if feedback == "\e[0;31;49m!\e[0m\e[0;31;49m!\e[0m\e[0;31;49m!\e[0m\e[0;31;49m!\e[0m"
       'won'
+    elsif i.nil?
+      'lost'
     else
       'ongoing'
     end
