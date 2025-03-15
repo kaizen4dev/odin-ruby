@@ -6,20 +6,18 @@ require_relative 'codable'
 class Game
   include Codable
 
-  def initialize(player = Player.new, board = Board.new)
-    self.player = player
-    self.board = board
-  end
-
   def start
+    # gamemode
+    gamemode = ask_gamemode
+
     # play game
-    outcome = play
+    outcome = play(gamemode)
 
     # print mesasge according to outcome
     if outcome == 'won'
-      puts 'Congrats! You guessed the code!'
+      puts 'Guesser won the game!'
     else
-      puts 'Congrats! You lost the game.'
+      puts 'Mastermind won the game!'
     end
 
     # ask for new game
@@ -32,16 +30,31 @@ class Game
 
   private
 
-  attr_accessor :player, :board
+  attr_accessor :board
+
+  # ask and return gamemode
+  def ask_gamemode
+    system('clear')
+    puts 'Choose gamemode: guesser(1) or mastermind(2)'
+    print 'Enter gamemode number: '
+    gamemode = gets.strip.to_i
+
+    ask_gamemode unless gamemode.between?(1, 2)
+
+    # assign/change board depending on gamemode
+    self.board = gamemode == 2 ? Board.new(ask_code) : Board.new
+
+    gamemode
+  end
 
   # let user play until game over, return outcome
-  def play
+  def play(gamemode)
     # play
     until board.game_over?
       system('clear')
       puts 'Guess the code!'
       puts board.board
-      guess = ask_code
+      guess = gamemode == 1 ? ask_code : bot
       outcome = board.make_guess(guess)
     end
 
@@ -50,6 +63,11 @@ class Game
     self.board = Board.new
 
     outcome
+  end
+
+  # let comptur make guess
+  def bot
+    generate_code
   end
 
   def next_game?
