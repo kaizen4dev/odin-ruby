@@ -42,7 +42,7 @@ class Game
     end
 
     # Add board to player.games and reset board
-    player.games = board
+    player.games << board
     self.board = Board.new
 
     outcome
