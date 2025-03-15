@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require_relative 'codable'
+
 # lets you to play
 class Game
+  include Codable
+
   def initialize(player = Player.new, board = Board.new)
     self.player = player
     self.board = board
@@ -37,7 +41,7 @@ class Game
       system('clear')
       puts "\nGuess the code!"
       puts board.board
-      guess = player.ask_code
+      guess = ask_code
       outcome = board.make_guess(guess)
     end
 

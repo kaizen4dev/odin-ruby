@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require_relative 'codable'
+
 # responsible for updating and storing board and code for mastermind
 class Board
+  include Codable
+
   # some default values
   ALL_COLORS = %i[red blue yellow green magenta cyan].freeze
   BOARD_BLUEPRINT = Array.new(12, '󰽤 󰽤 󰽤 󰽤 ')
@@ -13,15 +17,6 @@ class Board
   def initialize(code = generate_code)
     new_board
     self.code = code
-  end
-
-  # generates random code
-  def generate_code
-    code = []
-    4.times do
-      code << '󰽢'.colorize(ALL_COLORS.sample)
-    end
-    code.join(' ')
   end
 
   # reset/create board
