@@ -37,7 +37,7 @@ class Game
       system('clear')
       puts "\nGuess the code!"
       puts board.board
-      guess = player.make_guess
+      guess = player.ask_code
       outcome = board.make_guess(guess)
     end
 

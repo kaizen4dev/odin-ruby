@@ -11,7 +11,7 @@ class Player
     self.games = [] # all played games(or their represantation)
   end
 
-  def make_guess
+  def ask_code
     puts "Numbers represent colors: #{'1'.red}, #{'2'.blue}, #{'3'.yellow}, #{'4'.green}, #{'5'.magenta}, #{'6'.cyan}"
     puts 'Enter your guess(4 digits):'
     code = gets.strip
