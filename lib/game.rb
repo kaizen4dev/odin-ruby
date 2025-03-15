@@ -39,7 +39,7 @@ class Game
     # play
     until board.game_over?
       system('clear')
-      puts "\nGuess the code!"
+      puts 'Guess the code!'
       puts board.board
       guess = ask_code
       outcome = board.make_guess(guess)
