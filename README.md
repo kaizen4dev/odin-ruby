@@ -12,6 +12,8 @@ To clone this particular branch use: `git clone -b mastermind git@github.com:kai
 ## Features
 Checked features already implemented, rest are planned.
 
-- guess mode - user guesses random code ✅
-- mastermind mode - user creates code and bot(or another user) tries to guess it
-- posibility to save statistics
+- guess mode - done
+- mastermind mode - lacking proper algorithm for bot to guess the code
+- posibility to save statistics - idea abandoned
+
+P.S. I'm so sick of looking at Mastermind board.. I hate testing.
