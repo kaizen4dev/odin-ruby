@@ -82,9 +82,4 @@ class Game
     # ask again if input isn't yes or no
     next_game?
   end
-
-  def ask_name
-    puts 'What is your name?'
-    gets
-  end
 end
