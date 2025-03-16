@@ -58,10 +58,6 @@ class Game
       outcome = board.make_guess(guess)
     end
 
-    # Add board to player.games and reset board
-    player.games << board
-    self.board = Board.new
-
     outcome
   end
 
