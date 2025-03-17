@@ -57,7 +57,7 @@ class Game
     else
       # 2nd and 3rd gamemodes
       system('clear')
-      puts "Mastermind's choses the code!"
+      puts 'Mastermind enters the code!'
       self.board = Board.new(ask_code)
       return unless gamemode == 2
 
