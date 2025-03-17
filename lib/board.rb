@@ -5,6 +5,8 @@ require_relative 'scorable'
 
 # responsible for updating and storing board and code for mastermind
 class Board
+  private
+
   include Codable
   include Scorable
 
@@ -12,8 +14,6 @@ class Board
   ALL_COLORS = %i[red blue yellow green magenta cyan].freeze
   BOARD_BLUEPRINT = Array.new(12, '󰽤 󰽤 󰽤 󰽤 ')
   WINNING_SCORE = "\e[0;31;49m!\e[0m\e[0;31;49m!\e[0m\e[0;31;49m!\e[0m\e[0;31;49m!\e[0m"
-
-  private
 
   attr_writer :board, :code, :feedback
 
