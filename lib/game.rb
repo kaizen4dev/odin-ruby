@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'codable'
-
 # lets you to play
 class Game
   include Codable

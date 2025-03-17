@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'codable'
-require_relative 'scorable'
-
 # responsible for updating and storing board and code for mastermind
 class Board
   private
