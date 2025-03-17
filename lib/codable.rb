@@ -27,6 +27,11 @@ module Codable
     convert_code(code)
   end
 
+  # returns array with all posible codes(as numbers!)
+  def all_codes
+    (1111..6666).select { |i| i.digits.all? { |d| d.between?(1, 6) } }
+  end
+
   private
 
   # checks if code(as a number!) is valid
