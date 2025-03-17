@@ -27,9 +27,12 @@ module Codable
     convert_code(code)
   end
 
-  # returns array with all posible codes(as numbers!)
-  def all_codes
-    (1111..6666).select { |i| i.digits.all? { |d| d.between?(1, 6) } }
+  # returns array with all posible codes, by default as numbers.
+  # if true passed as an argument codes will be in form of spheres
+  def all_codes(spheres = false)
+    codes = (1111..6666).select { |i| i.digits.all? { |d| d.between?(1, 6) } }
+
+    spheres ? codes.map { |c| convert_code(c) } : codes
   end
 
   private
