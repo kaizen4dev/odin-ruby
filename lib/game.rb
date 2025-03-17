@@ -15,6 +15,9 @@ class Game
     # play game
     outcome = play(gamemode)
 
+    # show updated board
+    show_board
+
     # print mesasge according to outcome
     if outcome == 'won'
       puts 'Guesser won the game!'
