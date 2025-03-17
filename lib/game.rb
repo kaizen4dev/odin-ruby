@@ -6,8 +6,11 @@ class Game
   include Scorable
 
   def start
-    # gamemode
+    # get gamemode
     gamemode = ask_gamemode
+
+    # assign/change board and variables depending on gamemode
+    prepare(gamemode)
 
     # play game
     outcome = play(gamemode)
@@ -40,9 +43,6 @@ class Game
 
     ask_gamemode unless gamemode.between?(1, 3)
 
-    # assign/change board and variables depending on gamemode
-    prepare(gamemode)
-
     gamemode
   end
 
@@ -68,14 +68,20 @@ class Game
   def play(gamemode)
     # play
     until board.game_over?
-      system('clear')
-      puts 'Guess the code!'
-      puts board.board
+      show_board
       self.guess = gamemode == 2 ? bot : ask_code
       outcome = board.make_guess(guess)
     end
 
+    # return result of the game
     outcome
+  end
+
+  # shows current board
+  def show_board
+    system('clear')
+    puts 'Guess the code!'
+    puts board.board
   end
 
   # let comptur make guess
