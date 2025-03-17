@@ -9,6 +9,7 @@ class Board
   # some default values
   ALL_COLORS = %i[red blue yellow green magenta cyan].freeze
   BOARD_BLUEPRINT = Array.new(12, '󰽤 󰽤 󰽤 󰽤 ')
+  WINNING_SCORE = "\e[0;31;49m!\e[0m\e[0;31;49m!\e[0m\e[0;31;49m!\e[0m\e[0;31;49m!\e[0m"
 
   private
 
@@ -105,7 +106,7 @@ class Board
     board[i] = "#{guess} | #{feedback}" unless i.nil?
 
     # return status
-    if feedback == "\e[0;31;49m!\e[0m\e[0;31;49m!\e[0m\e[0;31;49m!\e[0m\e[0;31;49m!\e[0m"
+    if feedback == WINNING_SCORE
       'won'
     elsif i.nil?
       'lost'
@@ -115,7 +116,7 @@ class Board
   end
 
   def game_over?
-    board.index('󰽤 󰽤 󰽤 󰽤 ').nil? || feedback == "\e[0;31;49m!\e[0m\e[0;31;49m!\e[0m\e[0;31;49m!\e[0m\e[0;31;49m!\e[0m"
+    board.index('󰽤 󰽤 󰽤 󰽤 ').nil? || feedback == WINNING_SCORE
   end
 
   def self.colors
