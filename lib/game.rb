@@ -3,6 +3,7 @@
 # lets you to play
 class Game
   include Codable
+  include Scorable
 
   def start
     # gamemode
@@ -28,7 +29,7 @@ class Game
 
   private
 
-  attr_accessor :board
+  attr_accessor :board, :guess
 
   # ask and return gamemode
   def ask_gamemode
@@ -55,6 +56,11 @@ class Game
       system('clear')
       puts "Mastermind's choses the code!"
       self.board = Board.new(ask_code)
+      return unless gamemode == 2
+
+      # 2nd gamemode only
+      @possible_codes = all_codes(true)
+      self.guess = nil
     end
   end
 
@@ -65,7 +71,7 @@ class Game
       system('clear')
       puts 'Guess the code!'
       puts board.board
-      guess = gamemode == 2 ? bot : ask_code
+      self.guess = gamemode == 2 ? bot : ask_code
       outcome = board.make_guess(guess)
     end
 
@@ -74,7 +80,16 @@ class Game
 
   # let comptur make guess
   def bot
-    generate_code
+    # first guess is random
+    return generate_code if guess.nil?
+
+    # we can take all possible codes and compare them with our (previous)guess, reducing
+    # list of possible codes. It works because by comparing code chosen by mastermind
+    # and our guess we will always receive same feedback.
+    @possible_codes.select! { |code| new_feedback(code, guess) == board.feedback }
+
+    # choose random code from possibilities
+    @possible_codes.sample
   end
 
   def next_game?
