@@ -54,7 +54,7 @@ module Codable
     colors = Board.colors
 
     # split number to array
-    numbers = number.split('')
+    numbers = number.is_a?(String) ? number.chars : number.digits
 
     # declare code array
     code = []
