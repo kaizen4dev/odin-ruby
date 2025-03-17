@@ -33,16 +33,29 @@ class Game
   # ask and return gamemode
   def ask_gamemode
     system('clear')
-    puts 'Choose gamemode: guesser(1) or mastermind(2)'
+    puts 'Choose gamemode: guesser(1), mastermind(2) or two players(3)'
     print 'Enter gamemode number: '
     gamemode = gets.strip.to_i
 
-    ask_gamemode unless gamemode.between?(1, 2)
+    ask_gamemode unless gamemode.between?(1, 3)
 
-    # assign/change board depending on gamemode
-    self.board = gamemode == 2 ? Board.new(ask_code) : Board.new
+    # assign/change board and variables depending on gamemode
+    prepare(gamemode)
 
     gamemode
+  end
+
+  # prepares board and needed variables depending on gamemode
+  def prepare(gamemode)
+    # 1st gamemode
+    if gamemode == 1
+      self.board = Board.new
+    else
+      # 2nd and 3rd gamemodes
+      system('clear')
+      puts "Mastermind's choses the code!"
+      self.board = Board.new(ask_code)
+    end
   end
 
   # let user play until game over, return outcome
@@ -52,7 +65,7 @@ class Game
       system('clear')
       puts 'Guess the code!'
       puts board.board
-      guess = gamemode == 1 ? ask_code : bot
+      guess = gamemode == 2 ? bot : ask_code
       outcome = board.make_guess(guess)
     end
 
