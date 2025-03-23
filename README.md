@@ -20,7 +20,7 @@ Sub Strings:
 string from array in provided message
 
 Stock Picker:
-- stock_picker(array) - found best days to buy and sell stock in
+- stock_picker(array) - find best days to buy and sell stock in
 hypothetical days. Where index of array = day and value = price
 
 Bubble Sort:
