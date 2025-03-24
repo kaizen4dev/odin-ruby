@@ -1,0 +1,14 @@
+TOP HOURS
+14: 3 registrations
+11: 3 registrations
+18: 2 registrations
+sum: 8 registrations
+rest hours: 11 registrations
+
+TOP DAYS
+Wednesday: 8 registrations
+Sunday: 4 registrations
+Thursday: 4 registrations
+sum: 16 registrations
+rest days: 3 registrations
+

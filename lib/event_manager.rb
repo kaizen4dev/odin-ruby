@@ -35,9 +35,10 @@ def legislators_by_zipcode(zipcode)
 end
 
 def create_letter_file(id, letter)
-  filename = "output/thanks_#{id}.html"
+  filename = "output/letters/thanks_#{id}.html"
 
   Dir.mkdir('output') unless Dir.exist?('output')
+  Dir.mkdir('output/letters') unless Dir.exist?('output/letters')
 
   File.open(filename, 'w') do |file|
     file.puts letter
@@ -45,7 +46,7 @@ def create_letter_file(id, letter)
 end
 
 def add_to_phonebook(name, number)
-  file = File.open('phonebook.txt', 'a+')
+  file = File.open('output/phonebook.txt', 'a+')
   entry = "#{name}: #{number}"
 
   file.puts entry unless file.read.include?(entry)
@@ -55,7 +56,7 @@ end
 # create statistics for hash(es) that contain name and another hash
 # example: {name: "something", hash: {number: 234, str: "bla, bla"}}
 def create_statistics(*args)
-  file = File.open('stats.txt', 'w')
+  file = File.open('output/stats.txt', 'w')
 
   args.each do |arg|
     top = find_top_counts(arg[:hash], arg[:name])
