@@ -121,6 +121,9 @@ class Game
       savename = ask_savename
     end
 
+    # don't allow empty name
+    save if savename.empty?
+
     # create savefile
     new_save(savename)
 
