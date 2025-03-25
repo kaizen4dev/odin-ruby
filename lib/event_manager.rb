@@ -54,7 +54,7 @@ def add_to_phonebook(name, number)
 end
 
 # create statistics for hash(es) that contain name and another hash
-# example: {name: "something", hash: {number: 234, str: "bla, bla"}}
+# example: {name: "something", hash: {number: 234, num: 1234, nmbr: 2222}}
 def create_statistics(*args)
   file = File.open('output/stats.txt', 'w')
 
@@ -67,7 +67,7 @@ end
 # write stats from hash to file
 def write_statistics(hash, file, items = 'items')
   file.puts "TOP #{items.upcase}"
-  hash.to_h.each do |key, value|
+  hash.each do |key, value|
     file.puts "#{key}: #{value} registrations"
   end
   file.puts "\n"
