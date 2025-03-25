@@ -4,7 +4,7 @@
 class Game
   private
 
-  attr_accessor %i[word guesses tries]
+  attr_accessor :word, :guesses, :tries
 
   def initialize
     self.word = random_word
