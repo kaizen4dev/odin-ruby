@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'json'
+
 # logic of the game
 class Game
   def start
@@ -7,9 +9,9 @@ class Game
     play while ongoing?
 
     # print result after game finished
-    result = word == guesses.join('') ? 'won' : 'lost'
+    result = game['word'] == game['guesses'].join('') ? 'won' : 'lost'
 
-    puts "Answer: #{word}"
+    puts "Answer: #{game['word']}"
     puts "Congrats, you #{result} the game!"
   end
 
@@ -19,12 +21,45 @@ class Game
 
   private
 
-  attr_accessor :word, :guesses, :tries
+  attr_accessor :game
 
   def initialize
-    self.word = random_word
-    self.guesses = Array.new(word.size, '_')
-    self.tries = word.size / 2
+    puts '(1) Start new game'
+    puts '(2) Load game'
+
+    number = 0
+    until number.between?(1, 2)
+      print 'Enter number: '
+      number = gets.strip.to_i
+    end
+
+    prepare(number)
+  end
+
+  def prepare(number)
+    self.game = {}
+
+    if number == 1
+      game['word'] = random_word
+      game['guesses'] = Array.new(game['word'].size, '_')
+      game['tries'] = game['word'].size / 2
+    else
+      load
+    end
+  end
+
+  def load
+    puts 'Tip: enter empty line to abort'
+    savename = ask_savename
+
+    until save_exist?(savename) || savename.empty?
+      puts "Save doesn't exist"
+      savename = ask_savename
+    end
+
+    exit! if savename.empty?
+
+    self.game = read_saves[savename]
   end
 
   def random_word
@@ -33,8 +68,8 @@ class Game
 
   def play
     system('clear')
-    puts "Word: #{guesses.join}"
-    puts "Tries left: #{tries}\n"
+    puts "Word: #{game['guesses'].join}"
+    puts "Tries left: #{game['tries']}\n"
 
     register_guess(ask_guess)
   end
@@ -58,21 +93,63 @@ class Game
 
     return save if guess == 'save'
 
-    return self.tries -= 1 unless word.include?(guess)
+    return game['tries'] -= 1 unless game['word'].include?(guess)
 
-    word.chars.each_with_index do |char, i|
-      guesses[i] = char if char == guess
+    game['word'].chars.each_with_index do |char, i|
+      game['guesses'][i] = char if char == guess
     end
   end
 
   def ongoing?
-    return false if tries.zero? || word == guesses.join('')
+    return false if game['tries'].zero? || game['word'] == game['guesses'].join('')
 
     true
   end
 
   def save
-    puts "Game saving isn't implemented yet, so your game is lost :>"
+    # create saves dir
+    Dir.mkdir('saves') unless Dir.exist?('saves')
+
+    # ask for savename
+    savename = ask_savename
+
+    # ask again if save with such name already exist
+    while save_exist?(savename)
+      puts 'Save with such name already exist. Do you wish to overwrite it?'
+      break if gets[0] == 'y'
+
+      savename = ask_savename
+    end
+
+    # create savefile
+    new_save(savename)
+
+    # exit game
     exit!
+  end
+
+  def new_save(savename)
+    saves = File.exist?('saves.json') ? read_saves : {}
+    saves[savename] = game
+    json = JSON.generate(saves)
+
+    file = File.open('saves.json', 'w')
+    file.puts(json)
+    file.close
+  end
+
+  def ask_savename
+    print 'Enter save name: '
+    gets.strip
+  end
+
+  def save_exist?(savename)
+    return false unless File.exist?('saves.json')
+
+    read_saves.include?(savename)
+  end
+
+  def read_saves
+    JSON.parse(File.read('saves.json'))
   end
 end
