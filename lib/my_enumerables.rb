@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# my implementation of enumerable methods
 module Enumerable
   # Your code goes here
 end
@@ -8,4 +11,9 @@ end
 # to this method
 class Array
   # Define my_each here
+  def my_each
+    for item in self # rubocop:disable Style/for
+      yield(item)
+    end
+  end
 end
