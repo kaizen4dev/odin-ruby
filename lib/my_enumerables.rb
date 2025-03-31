@@ -10,6 +10,12 @@ module Enumerable
       count += 1
     end
   end
+
+  def my_select
+    new = []
+    my_each { |item| new.push item if yield(item) }
+    new
+  end
 end
 
 # You will first have to define my_each
