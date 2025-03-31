@@ -3,6 +3,13 @@
 # my implementation of enumerable methods
 module Enumerable
   # Your code goes here
+  def my_each_with_index
+    count = 0
+    my_each do |item|
+      yield(item, count)
+      count += 1
+    end
+  end
 end
 
 # You will first have to define my_each
