@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# ____________Psudocode______________
+# ____________Pseudocode_____________
 # handle 0 and 1
 #
 # check if previous fibonacci number exist
