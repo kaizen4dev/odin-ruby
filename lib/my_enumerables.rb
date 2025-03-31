@@ -26,6 +26,10 @@ module Enumerable
     my_each { |item| return true if yield(item) }
     false
   end
+
+  def my_none?(&block)
+    my_any?(&block) ? false : true
+  end
 end
 
 # You will first have to define my_each
