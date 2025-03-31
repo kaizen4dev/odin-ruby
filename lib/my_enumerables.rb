@@ -44,6 +44,12 @@ module Enumerable
     my_each { |item| new.push(yield(item)) }
     new
   end
+
+  def my_inject(arg)
+    memo = arg
+    my_each { |item| memo = yield(memo, item) }
+    memo
+  end
 end
 
 # You will first have to define my_each
