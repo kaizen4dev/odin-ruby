@@ -16,6 +16,11 @@ module Enumerable
     my_each { |item| new.push item if yield(item) }
     new
   end
+
+  def my_all?
+    my_each { |item| return false unless yield(item) }
+    true
+  end
 end
 
 # You will first have to define my_each
