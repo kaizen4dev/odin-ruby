@@ -38,6 +38,12 @@ module Enumerable
     my_each { |item| count += 1 if yield(item) }
     count
   end
+
+  def my_map
+    new = []
+    my_each { |item| new.push(yield(item)) }
+    new
+  end
 end
 
 # You will first have to define my_each
