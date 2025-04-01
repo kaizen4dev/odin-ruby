@@ -28,7 +28,7 @@ module Enumerable
   end
 
   def my_none?(&block)
-    my_any?(&block) ? false : true
+    !my_any?(&block)
   end
 
   def my_count
