@@ -104,6 +104,7 @@ class LinkedList
   def insert_at(value, index)
     prv = node_at(index - 1)
     prv.next = Node.new(value, prv.next)
+    self.size += 1
   end
 
   # remove node at provided index
@@ -112,6 +113,7 @@ class LinkedList
     removed = prv.next
     prv.next = removed.next
     removed.value
+    self.size -= 1
   end
 
   private
