@@ -48,6 +48,16 @@ class LinkedList
     node_at(index).value
   end
 
+  def pop
+    self.size -= 1
+    removed = tail_node
+
+    self.tail_node = node_at(size - 1)
+    tail_node.next = nil
+
+    removed.value
+  end
+
   private
 
   attr_writer :head_node, :tail_node, :size
