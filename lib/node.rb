@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# single node, used in linked list
 class Node
   attr_accessor :value, :next
 
