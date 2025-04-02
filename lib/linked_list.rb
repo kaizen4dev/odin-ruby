@@ -89,6 +89,11 @@ class LinkedList
     string << 'nil'
   end
 
+  def insert_at(value, index)
+    prv = node_at(index - 1)
+    prv.next = Node.new(value, prv.next)
+  end
+
   private
 
   attr_writer :head_node, :tail_node, :size
