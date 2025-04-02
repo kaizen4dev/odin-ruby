@@ -23,6 +23,7 @@ class LinkedList
     new_node = Node.new(value)
     tail_node.next = new_node
     self.tail_node = new_node
+    self.size += 1
   end
 
   def head
