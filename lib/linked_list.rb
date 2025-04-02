@@ -25,6 +25,14 @@ class LinkedList
     self.tail_node = new_node
   end
 
+  def head
+    head_node.value
+  end
+
+  def tail
+    tail_node.value
+  end
+
   private
 
   attr_writer :head_node, :tail_node, :size
