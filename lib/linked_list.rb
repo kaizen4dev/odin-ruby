@@ -64,6 +64,19 @@ class LinkedList
     current.value == value
   end
 
+  def find(value)
+    current = head_node
+    index = 0
+
+    loop do
+      return nil if current.nil?
+      return index if current.value == value
+
+      current = current.next
+      index += 1
+    end
+  end
+
   private
 
   attr_writer :head_node, :tail_node, :size
