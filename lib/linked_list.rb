@@ -94,6 +94,13 @@ class LinkedList
     prv.next = Node.new(value, prv.next)
   end
 
+  def remove_at(index)
+    prv = node_at(index - 1)
+    removed = prv.next
+    prv.next = removed.next
+    removed.value
+  end
+
   private
 
   attr_writer :head_node, :tail_node, :size
