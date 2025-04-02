@@ -6,6 +6,10 @@ require_relative 'node'
 class LinkedList
   attr_reader :head_node, :tail_node, :size
 
+  def initialize
+    self.size = 0
+  end
+
   private
 
   attr_writer :head_node, :tail_node, :size
