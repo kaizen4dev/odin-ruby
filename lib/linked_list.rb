@@ -33,6 +33,20 @@ class LinkedList
     tail_node.value
   end
 
+  def node_at(index)
+    current = head_node
+
+    index.times do
+      current = current.next
+    end
+
+    current
+  end
+
+  def at(index)
+    node_at(index).value
+  end
+
   private
 
   attr_writer :head_node, :tail_node, :size
