@@ -58,6 +58,12 @@ class LinkedList
     removed.value
   end
 
+  def contains?(value)
+    current = head_node
+    current = current.next until current.value == value || current == tail_node
+    current.value == value
+  end
+
   private
 
   attr_writer :head_node, :tail_node, :size
