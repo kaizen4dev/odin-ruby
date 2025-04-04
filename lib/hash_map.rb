@@ -66,6 +66,20 @@ class HashMap
     keys
   end
 
+  def values
+    values = []
+    array.each do |bucket|
+      next if bucket.head_node.nil?
+
+      current = bucket.head_node
+      until current.nil?
+        values.push(current.value)
+        current = current.next
+      end
+    end
+    values
+  end
+
   private
 
   attr_writer :load_factor, :capacity, :array
