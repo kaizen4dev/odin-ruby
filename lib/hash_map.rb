@@ -44,6 +44,10 @@ class HashMap
     array[hash(key) % capacity].remove(key)
   end
 
+  def length
+    array.map(&:size).sum
+  end
+
   private
 
   attr_writer :load_factor, :capacity, :array
