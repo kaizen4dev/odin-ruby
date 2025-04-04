@@ -52,6 +52,20 @@ class HashMap
     self.array = Array.new(capacity) { Bucket.new }
   end
 
+  def keys
+    keys = []
+    array.each do |bucket|
+      next if bucket.head_node.nil?
+
+      current = bucket.head_node
+      until current.nil?
+        keys.push(current.key)
+        current = current.next
+      end
+    end
+    keys
+  end
+
   private
 
   attr_writer :load_factor, :capacity, :array
