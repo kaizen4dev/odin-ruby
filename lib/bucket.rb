@@ -73,6 +73,7 @@ class Bucket
       prev = current
       current = current.next
     end
+    self.size -= 1
 
     self.head_node = head_node.next if head_node.key == key
 
