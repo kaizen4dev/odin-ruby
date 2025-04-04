@@ -40,6 +40,10 @@ class HashMap
     !get(key).nil?
   end
 
+  def remove(key)
+    array[hash(key) % capacity].remove(key)
+  end
+
   private
 
   attr_writer :load_factor, :capacity, :array
