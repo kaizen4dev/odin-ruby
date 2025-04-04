@@ -36,6 +36,10 @@ class HashMap
     found
   end
 
+  def has?(key)
+    !get(key).nil?
+  end
+
   private
 
   attr_writer :load_factor, :capacity, :array
