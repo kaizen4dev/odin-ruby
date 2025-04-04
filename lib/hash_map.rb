@@ -22,6 +22,7 @@ class HashMap
   end
 
   def set(key, value)
+    grow
     array[hash(key) % capacity].set(key, value)
   end
 
@@ -92,6 +93,19 @@ class HashMap
       end
     end
     entries
+  end
+
+  def grow
+    return unless array.map(&:size).any? { |size| size > capacity * load_factor }
+
+    capacity *= 2
+    entries = entries()
+
+    self.array = Array.new(capacity) { Bucket.new }
+
+    entries.each do |entry|
+      set(entry[0], entry[1])
+    end
   end
 
   private
