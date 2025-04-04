@@ -41,15 +41,15 @@ class Bucket
   # check if bucket contains node with provided value
   def value?(value)
     current = head_node
-    current = current.next until current.value == value || current == tail_node
-    current.value == value
+    current = current.next until current.nil? || current.value == value || current == tail_node
+    current.value == value unless current.nil?
   end
 
   # check if bucket contains node with provided key
   def key?(key)
     current = head_node
-    current = current.next until current.key == key || current == tail_node
-    current.key == key
+    current = current.next until current.nil? || current.key == key || current == tail_node
+    current.key == key unless current.nil?
   end
 
   # find key of an value, returns nil if not found
