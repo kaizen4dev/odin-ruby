@@ -58,6 +58,22 @@ class Bucket
     end
   end
 
+  def remove(key)
+    prev = current = head_node
+    loop do
+      return nil if current.nil?
+      break if current.key == key
+
+      prev = current
+      current = current.next
+    end
+
+    self.head_node = head_node.next if head_node.key == key
+
+    prev.next = current.next
+    current.value
+  end
+
   private
 
   attr_writer :head_node, :tail_node, :size
