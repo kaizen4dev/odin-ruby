@@ -21,6 +21,10 @@ class HashMap
     hash_code
   end
 
+  def set(key, value)
+    array[hash(key) % capacity].set(key, value)
+  end
+
   private
 
   attr_writer :load_factor, :capacity, :array
