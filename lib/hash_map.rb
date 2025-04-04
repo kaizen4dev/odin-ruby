@@ -80,6 +80,20 @@ class HashMap
     values
   end
 
+  def entries
+    entries = []
+    array.each do |bucket|
+      next if bucket.head_node.nil?
+
+      current = bucket.head_node
+      until current.nil?
+        entries.push([current.key, current.value])
+        current = current.next
+      end
+    end
+    entries
+  end
+
   private
 
   attr_writer :load_factor, :capacity, :array
