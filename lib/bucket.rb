@@ -14,11 +14,15 @@ class Bucket
   # add value to the end of Linked List
   def set(key, value)
     new_node = Node.new(key, value)
-    tail_node.next = new_node
-    self.tail_node = new_node
-    self.size += 1
 
-    self.head_node = tail_node if head_node.nil?
+    if head_node.nil?
+      self.head_node = self.tail_node = new_node
+    else
+      tail_node.next = new_node
+      self.tail_node = new_node
+    end
+
+    self.size += 1
   end
 
   # get value of entry with provided key
