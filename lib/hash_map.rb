@@ -48,6 +48,10 @@ class HashMap
     array.map(&:size).sum
   end
 
+  def clear
+    self.array = Array.new(capacity) { Bucket.new }
+  end
+
   private
 
   attr_writer :load_factor, :capacity, :array
