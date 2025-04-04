@@ -13,6 +13,8 @@ class Bucket
 
   # add value to the end of Linked List
   def set(key, value)
+    return overwrite(key, value) if key?(key)
+
     new_node = Node.new(key, value)
 
     if head_node.nil?
@@ -76,6 +78,17 @@ class Bucket
 
     prev.next = current.next
     current.value
+  end
+
+  def overwrite(key, value)
+    current = head_node
+    loop do
+      return nil if current.nil?
+      break if current.key == key
+
+      current = current.next
+    end
+    current.value = value
   end
 
   private
