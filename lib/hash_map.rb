@@ -9,7 +9,7 @@ class HashMap
   def initialize
     self.capacity = 16
     self.load_factor = 0.8
-    self.array = Array.new(16, Bucket.new)
+    self.array = Array.new(16) { Bucket.new }
   end
 
   def hash(key)
