@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'linked_list'
+require_relative 'bucket'
 
 # my hashmap implementation
 class HashMap
@@ -9,7 +9,7 @@ class HashMap
   def initialize
     self.capacity = 16
     self.load_factor = 0.8
-    self.array = Array.new(16, LinkedList.new)
+    self.array = Array.new(16, Bucket.new)
   end
 
   private
