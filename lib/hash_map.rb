@@ -25,6 +25,17 @@ class HashMap
     array[hash(key) % capacity].set(key, value)
   end
 
+  def get(key)
+    found = nil
+
+    array.each do |bucket|
+      found = bucket.get(key)
+      break unless found.nil?
+    end
+
+    found
+  end
+
   private
 
   attr_writer :load_factor, :capacity, :array
