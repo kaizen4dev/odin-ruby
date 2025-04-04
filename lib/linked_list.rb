@@ -109,11 +109,11 @@ class LinkedList
 
   # remove node at provided index
   def remove_at(index)
+    self.size -= 1
     prv = node_at(index - 1)
     removed = prv.next
     prv.next = removed.next
     removed.value
-    self.size -= 1
   end
 
   private
