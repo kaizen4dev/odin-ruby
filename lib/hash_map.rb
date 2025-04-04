@@ -98,7 +98,7 @@ class HashMap
   def grow
     return unless array.map(&:size).any? { |size| size > capacity * load_factor }
 
-    capacity *= 2
+    self.capacity *= 2
     entries = entries()
 
     self.array = Array.new(capacity) { Bucket.new }
