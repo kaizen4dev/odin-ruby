@@ -18,6 +18,24 @@ class Tree
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
+  def insert(value, node = root)
+    # find leaf node and which side to use for insertion
+    left = nil
+    loop do
+      return node if value == node.value
+
+      left = value < node.value
+      next_node = left ? node.left : node.right
+      break if next_node.nil?
+
+      node = next_node
+    end
+
+    # insert new node
+    new = Node.new(value)
+    left ? node.left = new : node.right = new
+  end
+
   private
 
   attr_writer :root
