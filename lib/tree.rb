@@ -11,6 +11,13 @@ class Tree
     self.root = build_tree(array)
   end
 
+  # taken from Binary Search Trees lesson, my regards to whoever built that method.
+  def pretty_print(node = @root, prefix = '', is_left = true)
+    pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
+    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.value}"
+    pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
+  end
+
   private
 
   attr_writer :root
