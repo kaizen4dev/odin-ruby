@@ -68,6 +68,14 @@ class Tree
     node
   end
 
+  def find(value, node = root)
+    return if node.nil?
+    return node if node.value == value
+
+    next_node = node.value > value ? node.left : node.right
+    find(value, next_node)
+  end
+
   private
 
   attr_writer :root
