@@ -36,6 +36,38 @@ class Tree
     left ? node.left = new : node.right = new
   end
 
+  def delete(value, node = root) # rubocop:disable Metrics
+    # base case
+    return if node.nil?
+
+    # compare value with current node's value
+    case value <=> node.value
+    when 1
+      # if value is more than current node's move to the right
+      node.right = delete(value, node.right)
+    when -1
+      # if value is less than current node's move to the left
+      node.left = delete(value, node.left)
+    when 0 # when values are equal
+      # if one/none of nodes is present
+      return node.right if node.left.nil?
+      return node.left if node.right.nil?
+
+      # if both nodes are present
+
+      # find replacement for deleted node
+      replacement = node.right
+      replacement = replacement.left until replacement.left.nil?
+
+      # assign replacement value to node and delete replacement node
+      node.value = replacement.value
+      node.right = delete(replacement.value, node.right)
+    end
+
+    # return node after everything is done.
+    node
+  end
+
   private
 
   attr_writer :root
