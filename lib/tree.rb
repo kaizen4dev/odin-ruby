@@ -153,6 +153,19 @@ class Tree # rubocop:disable Metrics/ClassLength
     node
   end
 
+  def balanced?(node = root, results = []) # rubocop:disable Metrics/AbcSize
+    return if node.nil?
+
+    left_height = node.left.nil? ? 0 : height(node.left.value)
+    right_height = node.right.nil? ? 0 : height(node.right.value)
+    results.push (left_height - right_height).between?(-1, 1)
+
+    balanced?(node.left, results)
+    balanced?(node.right, results)
+
+    results.all?(true)
+  end
+
   private
 
   attr_writer :root
