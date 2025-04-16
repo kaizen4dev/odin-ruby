@@ -126,6 +126,14 @@ class Tree
     values unless block_given?
   end
 
+  def depth(value, node = root, depth = 0)
+    return if node.nil?
+    return depth if node.value == value
+
+    next_node = node.value > value ? node.left : node.right
+    depth(value, next_node, depth + 1)
+  end
+
   private
 
   attr_writer :root
