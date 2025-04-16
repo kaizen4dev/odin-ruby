@@ -89,6 +89,18 @@ class Tree
     levels unless block_given?
   end
 
+  def preorder(node = root, values = [], &block)
+    return if node.nil?
+
+    values.push node.value
+    yield node if block_given?
+
+    preorder(node.left, values, &block)
+    preorder(node.right, values, &block)
+
+    values unless block_given?
+  end
+
   private
 
   attr_writer :root
