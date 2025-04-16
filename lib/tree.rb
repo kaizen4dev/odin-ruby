@@ -114,6 +114,18 @@ class Tree
     values unless block_given?
   end
 
+  def postorder(node = root, values = [], &block)
+    return if node.nil?
+
+    postorder(node.left, values, &block)
+    postorder(node.right, values, &block)
+
+    values.push node.value
+    yield node if block_given?
+
+    values unless block_given?
+  end
+
   private
 
   attr_writer :root
