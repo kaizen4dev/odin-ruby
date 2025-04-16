@@ -3,7 +3,7 @@
 require_relative 'node'
 
 # binary search tree
-class Tree
+class Tree # rubocop:disable Metrics/ClassLength
   attr_reader :root
 
   def initialize(array)
@@ -139,6 +139,18 @@ class Tree
   def height(value, node = root)
     found = find(value, node)
     level_order(found).size - 1 unless found.nil?
+  end
+
+  def rebalance(node = root)
+    return if node.nil?
+
+    new_node = build_tree(inorder(node))
+
+    node.value = new_node.value
+    node.left = new_node.left
+    node.right = new_node.right
+
+    node
   end
 
   private
