@@ -77,6 +77,8 @@ class Tree
   end
 
   def level_order(node = root, &block)
+    return if node.nil?
+
     queue = [node]
     levels = []
 
