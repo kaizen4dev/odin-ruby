@@ -101,6 +101,19 @@ class Tree
     values unless block_given?
   end
 
+  def inorder(node = root, values = [], &block)
+    return if node.nil?
+
+    inorder(node.left, values, &block)
+
+    values.push node.value
+    yield node if block_given?
+
+    inorder(node.right, values, &block)
+
+    values unless block_given?
+  end
+
   private
 
   attr_writer :root
