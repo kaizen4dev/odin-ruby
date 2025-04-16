@@ -136,6 +136,11 @@ class Tree
     depth(value, next_node, depth + 1)
   end
 
+  def height(value, node = root)
+    found = find(value, node)
+    level_order(found).size - 1 unless found.nil?
+  end
+
   private
 
   attr_writer :root
