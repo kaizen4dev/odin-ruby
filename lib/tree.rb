@@ -76,6 +76,19 @@ class Tree
     find(value, next_node)
   end
 
+  def level_order(node = root, &block)
+    queue = [node]
+    levels = []
+
+    until queue.empty?
+      levels.push queue.map(&:value)
+      queue.each(&block)
+      queue = queue.map { |node| [node.left, node.right] }.flatten.compact
+    end
+
+    levels unless block_given?
+  end
+
   private
 
   attr_writer :root
