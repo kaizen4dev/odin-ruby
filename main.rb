@@ -38,3 +38,9 @@ class Move
     moves
   end
 end
+
+# demonstration
+moves = knight_moves([3, 3], [4, 3])
+
+puts "You made it in #{moves.size - 1} moves! Here's your path:"
+moves.each { |move| p move }
