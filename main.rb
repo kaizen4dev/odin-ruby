@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+def knight_moves(start_pos, _end_pos); end
+
+def possible_moves
+  directions = [[-1, 2], [-2, 1], [1, -2], [2, -1], [-1, -2], [-2, -1], [1, 2], [2, 1]]
+  moves = directions.map { |move| [move[0] + start_pos[0], move[1] + start_pos[1]] }
+  moves.select { |move| move[0].between?(0, 7) && move[1].between?(0, 7) }
+end
