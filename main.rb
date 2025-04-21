@@ -16,4 +16,16 @@ class Move
     self.square = square
     self.from = from
   end
+
+  def to_a
+    move = self
+    moves = []
+
+    until move.nil?
+      moves.unshift(move.square)
+      move = move.from
+    end
+
+    moves
+  end
 end
