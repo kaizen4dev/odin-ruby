@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
-def knight_moves(start_pos, end_pos); end
+def knight_moves(start_pos, end_pos)
+  queue = [Move.new(start_pos)]
+
+  until queue.any? { |move| move.square == end_pos }
+    curr = queue.shift
+    possible_moves(curr.square).each { |next_square| queue.push Move.new(next_square, curr) }
+  end
+
+  queue.find { |move| move.square == end_pos }.to_a
+end
 
 def possible_moves(start_pos)
   directions = [[-1, 2], [-2, 1], [1, -2], [2, -1], [-1, -2], [-2, -1], [1, 2], [2, 1]]
