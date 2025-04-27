@@ -25,7 +25,7 @@ class Game
     input = $stdin.getch
 
     exit! if input == 'x'
-    ask_input unless input.to_i.between?(1, 7)
+    ask_column unless input.to_i.between?(1, 7)
 
     input.to_i
   end
