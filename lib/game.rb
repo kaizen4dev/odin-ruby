@@ -17,4 +17,16 @@ class Game
   def initialize
     self.board = Array.new(6) { Array.new(7, EMPTY_SPACE) }
   end
+
+  def ask_column
+    puts "Press one of the following:\n
+    1-7 - add ball to the column\n
+    x - exit game"
+    input = $stdin.getch
+
+    exit! if input == 'x'
+    ask_input unless input.to_i.between?(1, 7)
+
+    input.to_i
+  end
 end
