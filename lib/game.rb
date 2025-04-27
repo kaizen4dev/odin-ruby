@@ -29,4 +29,14 @@ class Game
 
     input.to_i
   end
+
+  def tutorial
+    puts "Welcome to the connect 4!\n
+      Here are 4 simple rules:\n
+      1. Go and fetch your friend, if you have one.. Anyway, game requires 2 players.\n
+      2. You and your friend will be playing as soccer ball and baseball. Soccer ball is always first to move.\n
+      3. Each turn you need to place 1 ball into the column, then pass pc to your friend, so he makes move too.\n
+      4. To win connect 4 balls into the line. Be it horizontally, vertically or even diagonally."
+    puts 'Press <Enter> to continue' until $stdin.getch == "\r"
+  end
 end
