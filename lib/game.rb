@@ -107,9 +107,6 @@ class Game
   end
 
   def save
-    # create saves dir
-    Dir.mkdir('saves') unless Dir.exist?('saves')
-
     # ask for savename
     savename = ask_savename
 
