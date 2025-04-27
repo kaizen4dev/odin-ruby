@@ -2,7 +2,7 @@
 
 # connect four game class
 class Game
-  attr_reader :board
+  attr_reader :board, :ball1, :ball2
 
   private
 
@@ -10,5 +10,7 @@ class Game
 
   def initialize
     self.board = Array.new(6) { Array.new(7, '⚫') }
+    @ball1 = '⚽'
+    @ball2 = '⚾'
   end
 end
