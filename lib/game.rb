@@ -18,6 +18,26 @@ class Game
     self.board = Array.new(6) { Array.new(7, EMPTY_SPACE) }
   end
 
+  def play(ball)
+    # show board
+    system('clear')
+    puts "#{ball}'s turn, make a move:"
+    show
+
+    # get position to insert ball
+    column = ask_column
+    row = find_row(column)
+
+    # insert ball and pass move to next player
+    board[row][column] = ball
+
+    # handle gameover
+    return ball if winner? # attention: #winner? isn't implemented yet.
+    return 'draw' if draw?
+
+    ball == BALL1 ? play(BALL2) : play(BALL1)
+  end
+
   def find_row(column = ask_column)
     row = []
     i = 0
