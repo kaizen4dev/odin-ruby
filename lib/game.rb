@@ -18,6 +18,17 @@ class Game
     self.board = Array.new(6) { Array.new(7, EMPTY_SPACE) }
   end
 
+  def find_row(column = ask_column)
+    row = []
+    i = 0
+    until row[column] == EMPTY_SPACE || row.nil?
+      i -= 1
+      row = board[i]
+    end
+
+    i unless row.nil?
+  end
+
   def draw?
     !board.map(&:join).join.include?(EMPTY_SPACE)
   end
