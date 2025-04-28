@@ -80,7 +80,7 @@ class Game
     exit! if input == 'x'
     ask_column unless input.to_i.between?(1, 7)
 
-    input.to_i
+    input.to_i - 1
   end
 
   def tutorial
