@@ -6,6 +6,16 @@ class Game
   BALL1 = '⚽'
   BALL2 = '⚾'
 
+  def start(show_tutorial: true)
+    tutorial if show_tutorial
+
+    winner = play(BALL1)
+
+    puts winner == 'draw' ? 'Game ended in draw!' : "#{winner} won the game!"
+    puts 'Press <Enter> to start new game, any other key to exit'
+    start(show_tutorial: false) if $stdin.getch == "\r"
+  end
+
   def show
     puts board.map(&:join) << '1|2|3|4|5|6|7'
   end
