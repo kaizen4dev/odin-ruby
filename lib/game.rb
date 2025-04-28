@@ -3,6 +3,8 @@
 # connect four game class
 class Game
   EMPTY_SPACE = '⚫'
+  ROWS = 6
+  COLUMNS = 7
   BALL1 = '⚽'
   BALL2 = '⚾'
 
@@ -25,7 +27,7 @@ class Game
   attr_accessor :board
 
   def initialize
-    self.board = Array.new(6) { Array.new(7, EMPTY_SPACE) }
+    self.board = Array.new(ROWS) { Array.new(COLUMNS, EMPTY_SPACE) }
   end
 
   def play(ball)
