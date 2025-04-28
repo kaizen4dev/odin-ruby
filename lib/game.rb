@@ -18,6 +18,10 @@ class Game
     self.board = Array.new(6) { Array.new(7, EMPTY_SPACE) }
   end
 
+  def draw?
+    !board.map(&:join).join.include?(EMPTY_SPACE)
+  end
+
   def ask_column
     puts "Press one of the following:\n
     1-7 - add ball to the column\n
