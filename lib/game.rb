@@ -53,9 +53,9 @@ class Game
   end
 
   def find_row(column = ask_column)
-    row = []
+    row = ''
     i = 0
-    until row[column] == EMPTY_SPACE || row.nil?
+    until row.nil? || row[column] == EMPTY_SPACE
       i -= 1
       row = board[i]
     end
