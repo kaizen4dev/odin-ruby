@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'io/console'
+
 # connect four game class
 class Game
   EMPTY_SPACE = '⚫'
@@ -63,6 +65,10 @@ class Game
 
   def draw?
     !board.join.include?(EMPTY_SPACE)
+  end
+
+  def winner?
+    false
   end
 
   def ask_column
