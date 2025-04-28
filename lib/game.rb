@@ -21,7 +21,7 @@ class Game
   end
 
   def show
-    puts board << '|1|2|3|4|5|6|7|'
+    puts board.dup << '|1|2|3|4|5|6|7|'
   end
 
   private
