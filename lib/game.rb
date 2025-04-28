@@ -29,7 +29,7 @@ class Game
   attr_accessor :board
 
   def initialize
-    self.board = Array.new(ROWS, EMPTY_SPACE * COLUMNS)
+    self.board = Array.new(ROWS) { EMPTY_SPACE * COLUMNS }
   end
 
   def play(ball)
