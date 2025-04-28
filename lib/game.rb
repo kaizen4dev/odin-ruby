@@ -19,7 +19,7 @@ class Game
   end
 
   def show
-    puts board.map(&:join) << '1|2|3|4|5|6|7'
+    puts board << '|1|2|3|4|5|6|7|'
   end
 
   private
@@ -27,7 +27,7 @@ class Game
   attr_accessor :board
 
   def initialize
-    self.board = Array.new(ROWS) { Array.new(COLUMNS, EMPTY_SPACE) }
+    self.board = Array.new(ROWS, EMPTY_SPACE * COLUMNS)
   end
 
   def play(ball)
@@ -62,7 +62,7 @@ class Game
   end
 
   def draw?
-    !board.map(&:join).join.include?(EMPTY_SPACE)
+    !board.join.include?(EMPTY_SPACE)
   end
 
   def ask_column
